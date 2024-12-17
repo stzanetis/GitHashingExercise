@@ -1,0 +1,18 @@
+#!/bin/bash
+
+read -p "Enter a 4-digit integer: " input
+
+# Check if the input is a 4-digit integer
+if ! [[ $input =~ ^[0-9]{4}$ ]]; then
+    echo "Error: Input is not a 4-digit integer."
+    exit 1
+fi
+
+# Compute the SHA-256 hash of the input
+hash=$(echo -n $input | sha256sum | awk '{print $1}')
+
+# Save the hash to hash_output.txt
+echo $hash > hash_output.txt
+
+# Print the hash to the console
+echo "Hash generated and stored on hash_output.txt"
